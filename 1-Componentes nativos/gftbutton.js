@@ -5,7 +5,13 @@ class GftButton extends HTMLElement {
             mode:'open'
         })
 
-        this.shadowRoot.addEventListener('click',this.onclick)
+        this.shadowRoot.addEventListener('click',() =>{
+            this.dispatchEvent( new CustomEvent('gft-button-click',{
+                bubbles:true,
+                composed:true,
+                detail:'button clicked'
+            }))
+        })
     }
 
     connectedCallbck(){
@@ -16,11 +22,6 @@ class GftButton extends HTMLElement {
 
     }
 
-    onclick(){
-        let edad = document.querySelector('card-info').getAttribute('edad')
-        
-        document.querySelector('card-info').setAttribute('edad',Number(edad) + 1)
-    }
 
     render(){
         this.shadowRoot.innerHTML = `
