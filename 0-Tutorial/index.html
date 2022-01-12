@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web components</title>
+</head>
+<body>
+    <template id="Mostar">
+        <p>
+            Este es un template
+        </p>
+    </template>
+
+    <template id="MostarAV">
+        <!-- asi gregamos css al component -->
+        <link rel="stylesheet" href="style.css">
+        <p>
+            Este es un Avanzado
+        </p>
+        <slot name="Variable"></slot>
+        <!-- sin variable metera todo el html dentro del componente -->
+        <slot>
+        </slot>
+    </template>
+    <button id="btnMostrar">Mostrar template</button>
+    <div id="divMostrar">
+
+    </div>
+    <!-- Sedben cerrar y abrir completo, d lo contrario o detectara lo demás -->
+    <app-saludo name="Ricardo"></app-saludo>
+    <span>jil</span>
+    <app-avanzado name="GFT"> 
+        <h3 slot="Variable">Slot</h3>
+        <p>Test</p>
+        <p>Tst 9</p>
+        <p>Test 600</p>
+    </app-avanzado>
+    <popup-info img="img/alt.png" data-text="Your card validation code (CVC)
+  is an extra security feature — it is the last 3 or 4 numbers on the
+  back of your card."></popup-info>
+    <script src="index.js"></script>
+    <script src="template.js"></script>
+    <script src="example.js"></script>
+</body>
+</html>
