@@ -92,7 +92,6 @@ class CardInfo extends HTMLElement {
             }
             else if(attr === 'img'){
                 this.img = newValue
-                console.log(this.shadowRoot.querySelector('img'));
                 this.shadowRoot.querySelector('img').setAttribute('src',this.img)
             }
             else {
