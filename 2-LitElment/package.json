@@ -1,0 +1,21 @@
+{
+  "name": "2-litelment",
+  "version": "1.0.0",
+  "description": "exercise litElement",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "polymer serve"
+  },
+  "keywords": [
+    "lit"
+  ],
+  "author": "Ricardo Hernandez",
+  "license": "ISC",
+  "dependencies": {
+    "lit-html": "^2.1.1"
+  },
+  "devDependencies": {
+    "polymer-cli": "^1.9.11"
+  }
+}
