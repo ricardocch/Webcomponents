@@ -13,6 +13,7 @@
   "author": "Ricardo Hernandez",
   "license": "ISC",
   "dependencies": {
+    "lit": "^2.1.1",
     "lit-html": "^2.1.1"
   },
   "devDependencies": {
