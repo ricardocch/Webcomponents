@@ -24,14 +24,27 @@ export class CardInfo extends LitElement {
   // Declare properties
   static get properties() {
     return {
-      name: { type: String, },
+      img: { type: String, },
+      nombre: { type: String, },
+      apellidoPaterno: { type: String, attribute:'apellido-paterno'},
+      apellidoMaterno: { type: String, attribute:'apellido-materno'},
+      edad: { type: Number, },
+      color: { type: String, },
+      ciudad: { type: String, },
+
     };
   }
 
   // Initialize properties
   constructor() {
     super();
-    this.name = 'Cells';
+    this.img = 'logo.png';
+    this.nombre = 'Cells';
+    this.apellidoPaterno = 'Lit';
+    this.apellidoMaterno = 'Element';
+    this.edad = 20;
+    this.color = 'Azul';
+    this.ciudad = 'Guadalajara';
   }
 
   static get styles() {
@@ -44,8 +57,17 @@ export class CardInfo extends LitElement {
   // Define a template
   render() {
     return html`
-      <slot></slot>
-      <p>Welcome to ${this.name}</p>
+    <div>
+        <img src="./assets/${this.img}" alt="imagen default" width="200">
+        <br/>
+        <span>Nombre:</span><span>${this.nombre}</span><br>
+        <span>Apellido Paterno:</span><span>${this.apellidoPaterno}</span><br>
+        <span>Apellido Materno:</span><span >${this.apellidoMaterno}</span><br>
+        <span>Edad:</span><span >${this.edad}</span><br>
+        <span>Color:</span><span>${this.color}</span><br>
+        <span>City:</span><span>${this.ciudad}</span><br>
+    </div>
+    <slot></slot>
     `;
   }
 }
