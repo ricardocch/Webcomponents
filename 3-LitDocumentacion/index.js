@@ -121,28 +121,48 @@ customElements.define('app-todo',ToDoList)
 
 class Visual extends LitElement {
      
-    static get  properties(){
-        return {
-            color:{
-                type:String,
-                reflect:true
-            },
-            theme:{
-                type:String,
-                state:true
-            }
-        }
-    }
+    //Version 1
+    // static get  properties(){
+    //     return {
+    //         color:{
+    //             type:String,
+    //             reflect:true
+    //         },
+    //         theme:{
+    //             type:String,
+    //             state:true
+    //         }
+    //     }
+    // }
 
- 
-    static get styles(){
-        console.log(this.color);
-        return  css`
+    //version 2
+    static properties  = {
+                color:{
+                    type:String,
+                    reflect:true
+                },
+                theme:{
+                    type:String,
+                    state:true
+                }
+            }
+
+    //version 1 con polymer server
+    // static get styles(){
+    //     console.log(this.color);
+    //     return  css`
+    //     .fondo{
+    //         background-color:red;
+    //     }
+    //     `;  
+    // }
+
+    //Version 2 con web dev server
+    static styles = css `
         .fondo{
             background-color:red;
         }
-        `;  
-    }
+    `
     constructor(){
         super()
         this.color = 'blue'

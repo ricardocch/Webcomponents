@@ -8,9 +8,11 @@
     "polymer-cli": "^1.9.11"
   },
   "type": "module",
-  "devDependencies": {},
+  "devDependencies": {
+    "@web/dev-server": "^0.1.29"
+  },
   "scripts": {
-    "start": "polymer serve",
+    "start": "wds --node-resolve --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
