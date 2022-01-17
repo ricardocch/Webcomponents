@@ -22,16 +22,14 @@ export class TodoList extends LitElement {
   }
 
   // Declare properties
-  static get properties() {
-    return {
-      name: { type: String, },
-    };
+  static  properties = {
+      todo: { type: Array,state:true }
   }
 
   // Initialize properties
   constructor() {
     super();
-    this.name = 'Cells';
+    this.todo = [];
   }
 
   static get styles() {
@@ -45,7 +43,19 @@ export class TodoList extends LitElement {
   render() {
     return html`
       <slot></slot>
-      <p>Welcome to ${this.name}</p>
+      <input type='text' /> <button @click=${this.onClick}>Agregar</button>
+      <div>
+        <ul>
+          ${this.todo.map(el => html`<li>${el}</li>`)}
+        </ul>
+      </div>
     `;
+  }
+
+  onClick(){
+    let toDoItem = this.renderRoot.querySelector('input')
+    this.todo.push(toDoItem.value)
+    toDoItem.value = ''
+    this.requestUpdate();
   }
 }
