@@ -1,0 +1,18 @@
+{
+  "name": "3-litdocumentacion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "lit": "^2.1.1",
+    "polymer-cli": "^1.9.11"
+  },
+  "type": "module",
+  "devDependencies": {},
+  "scripts": {
+    "start": "polymer serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

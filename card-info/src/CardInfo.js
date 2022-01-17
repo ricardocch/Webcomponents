@@ -25,7 +25,7 @@ export class CardInfo extends LitElement {
   static get properties() {
     return {
       img: { type: String, },
-      nombre: { type: String, },
+      nombre: { type: String,reflect:true },
       apellidoPaterno: { type: String, attribute:'apellido-paterno'},
       apellidoMaterno: { type: String, attribute:'apellido-materno'},
       edad: { type: Number, },
@@ -54,17 +54,26 @@ export class CardInfo extends LitElement {
     ];
   }
 
+  onClick(){
+    console.log('Hola Mundo');
+    this.nombre = "Hola"
+  }
   // Define a template
   render() {
-    return html`
+    return html` 
+    <style>
+    :host #color{
+      color:${this.color};
+    }
+    </style>
     <div>
-        <img src="./assets/${this.img}" alt="imagen default" width="200">
+        <img src="./assets/${this.img}" alt="imagen default" width="200" @click=${this.onClick}>
         <br/>
         <span>Nombre:</span><span>${this.nombre}</span><br>
         <span>Apellido Paterno:</span><span>${this.apellidoPaterno}</span><br>
         <span>Apellido Materno:</span><span >${this.apellidoMaterno}</span><br>
         <span>Edad:</span><span >${this.edad}</span><br>
-        <span>Color:</span><span>${this.color}</span><br>
+        <span>Color:</span><span id="color">${this.color}</span><br>
         <span>City:</span><span>${this.ciudad}</span><br>
     </div>
     <slot></slot>
