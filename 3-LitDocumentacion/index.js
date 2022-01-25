@@ -1,5 +1,8 @@
 import { LitElement,html,css } from "lit";
 
+import {classMap} from 'lit/directives/class-map.js';
+import {styleMap} from 'lit/directives/style-map.js';
+
 class MyElement extends LitElement{
     static get properties(){
         return{ 
@@ -23,6 +26,7 @@ class MyElement extends LitElement{
         this.text =  'Hola  mundo'
         this.disabled = false
     }
+
 
     render(){
         return html`
@@ -144,7 +148,9 @@ class Visual extends LitElement {
                 theme:{
                     type:String,
                     state:true
-                }
+                },
+                dinamycClass:{},
+                dinamycStyles:{}
             }
 
     //version 1 con polymer server
@@ -162,13 +168,29 @@ class Visual extends LitElement {
         .fondo{
             background-color:red;
         }
+
+        .amarillo{
+            background-color:yellow;
+            height:200px;
+            width:350px;
+        }
+
     `
     constructor(){
         super()
         this.color = 'blue'
         this.theme = ''
+        this.dinamycClass = {amarillo:true}
+        this.dinamycStyles = {backgroundColor:'#FEAE2E',height:'200px',width:'200px'}
         
      }
+
+     willUpdate(properties){
+        console.log(properties);
+        this.dinamycStyles = {backgroundColor:'green',height:'200px',width:'200px'}
+    }
+
+
 
      render(){
          return html`
@@ -178,11 +200,22 @@ class Visual extends LitElement {
             <div class=${this.theme ? 'fondo' : ''} @click=${this.onclick}>
                 <p class='color'>Este componente es visual</p>
             </div>
+            <div class=${classMap(this.dinamycClass)} @click=${this.changeClass}>
+
+            </div>
+            <div style=${styleMap(this.dinamycStyles)} @click=${this.changeStyle}>
+            </div>
          `
      }
 
+     changeStyle(){
+         this.dinamycStyles = {backgroundColor:'#FE9E9E',height:'300px',width:'500px'}
+     }
+
+     changeClass(){
+         this.dinamycClass = {amarillo:false}
+     }
      onclick(){
-         console.log(this.theme);
          this.theme = !this.theme ? 'fondo' : ''
      }
 }

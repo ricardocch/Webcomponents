@@ -1,0 +1,1 @@
+export { GftSearch } from './src/GftSearch.js';
