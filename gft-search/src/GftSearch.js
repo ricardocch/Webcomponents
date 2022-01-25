@@ -24,14 +24,16 @@ export class GftSearch extends LitElement {
   // Declare properties
   static get properties() {
     return {
-      name: { type: String, },
+      text: { type: String, },
+      disableButton:{type:Boolean}
     };
   }
 
   // Initialize properties
   constructor() {
     super();
-    this.name = 'Cells';
+    this.text = '';
+    this.disableButton = true;
   }
 
   static get styles() {
@@ -45,7 +47,27 @@ export class GftSearch extends LitElement {
   render() {
     return html`
       <slot></slot>
-      <p>Welcome to ${this.name}</p>
+      <input type="text" @input=${this.onInput}/><button ?disabled=${this.disableButton} @click=${this.onClick}>Buscar</button>
     `;
   }
+
+  onInput(event){
+    this.text = event.target.value
+
+    this.disableButton = this.text ? false : true
+  }
+
+  onClick(){
+    console.log({
+      searchPram:this.text
+    });
+    this.dispatchEvent( new CustomEvent('gft-button-click',{
+        bubbles:true,
+        composed:true,
+        detail:{
+          searchPram:this.text
+        }
+    }))
+  }
+
 }
