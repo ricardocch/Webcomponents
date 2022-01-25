@@ -71,7 +71,7 @@ export class GftSearch extends LitElement {
     console.log({
       searchPram:this.text
     });
-    this.dispatchEvent( new CustomEvent('gft-button-click',{
+    this.dispatchEvent( new CustomEvent('gft-search-click',{
         bubbles:true,
         composed:true,
         detail:{
