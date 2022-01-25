@@ -1,4 +1,4 @@
-import { LitElement, html, } from 'lit-element';
+import { LitElement, html, css} from 'lit-element';
 import { getComponentSharedStyles } from '@bbva-web-components/bbva-core-lit-helpers';
 import styles from './GftSearch-styles.js';
 /**
@@ -39,7 +39,17 @@ export class GftSearch extends LitElement {
   static get styles() {
     return [
       styles,
-      getComponentSharedStyles('gft-search-shared-styles')
+      getComponentSharedStyles('gft-search-shared-styles'),
+      css`button:disabled{
+        background-color:#bfa8ff;
+      }
+      button{
+        background-color:#6b37ff;
+        color:white;
+        border:1px solid;
+        padding:5px;
+      }
+      `
     ];
   }
 
