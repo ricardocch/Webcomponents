@@ -56,8 +56,8 @@ export class GftSearch extends LitElement {
   // Define a template
   render() {
     return html`
-      <slot></slot>
-      <input type="text" @input=${this.onInput}/><button ?disabled=${this.disableButton} @click=${this.onClick}>Buscar</button>
+      <input type="text" @input='${this.onInput}'/>
+      <button ?disabled='${this.disableButton}' @click='${this.onClick}'>Buscar</button>
     `;
   }
 
