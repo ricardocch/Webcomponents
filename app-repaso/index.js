@@ -1,0 +1,1 @@
+export { AppRepaso } from './src/AppRepaso.js';
