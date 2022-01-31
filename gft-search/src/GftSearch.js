@@ -1,6 +1,8 @@
 import { LitElement, html, css} from 'lit-element';
 import { getComponentSharedStyles } from '@bbva-web-components/bbva-core-lit-helpers';
-import styles from './GftSearch-styles.js';
+
+import './GftInputText.js'
+import'./GftButton.js'
 /**
 ![LitElement component](https://img.shields.io/badge/litElement-component-blue.svg)
 
@@ -24,8 +26,8 @@ export class GftSearch extends LitElement {
   // Declare properties
   static get properties() {
     return {
-      text: { type: String, },
-      disableButton:{type:Boolean}
+      disableButton:{type:Boolean},
+      text:{type:String}
     };
   }
 
@@ -33,51 +35,41 @@ export class GftSearch extends LitElement {
   constructor() {
     super();
     this.text = '';
-    this.disableButton = true;
+    this.isButtonDisabled = true;
   }
 
   static get styles() {
     return [
-      styles,
-      getComponentSharedStyles('gft-search-shared-styles'),
-      css`button:disabled{
-        background-color:#bfa8ff;
-      }
-      button{
-        background-color:#6b37ff;
-        color:white;
-        border:1px solid;
-        padding:5px;
-      }
-      `
     ];
   }
 
   // Define a template
   render() {
     return html`
-      <input type="text" @input='${this.onInput}'/>
-      <button ?disabled='${this.disableButton}' @click='${this.onClick}'>Buscar</button>
+        <gft-input-text @gft-input-fill="${this._onButtonEnable}" 
+         @gft-input-empty="${this._onButtonEnable}">
+         
+         </gft-input-text>
+         <gft-button .isDisabled="${this.isButtonDisabled}"  
+          @gft-button-clicked="${this._onSearchInfo}">
+            Buscar
+         </gft-button>
     `;
   }
 
-  onInput(event){
-    this.text = event.target.value
-
-    this.disableButton = this.text ? false : true
+  _onButtonEnable(event){
+    this.isButtonDisabled = event.detail ? false : true
+    this.text = event.detail
+    this.requestUpdate()
   }
 
-  onClick(){
-    console.log({
-      searchPram:this.text
-    });
-    this.dispatchEvent( new CustomEvent('gft-search-click',{
-        bubbles:true,
-        composed:true,
-        detail:{
-          searchPram:this.text
-        }
-    }))
+  _onSearchInfo(){
+    this.dispatchEvent( new CustomEvent('gft-search-info',{
+      bubbles:true,
+      composed:true,
+      detail:this.text
+  }))
   }
+
 
 }
