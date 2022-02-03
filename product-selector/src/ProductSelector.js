@@ -74,6 +74,7 @@ export class ProductSelector extends LitElement {
     if (this.countItems >= this.selected ||  this.selected > this.countItems ) {
       this.countItems = -1;
     }
+    
   }
 
   renderProducts(product,index){
@@ -83,6 +84,9 @@ export class ProductSelector extends LitElement {
     const productTpl = this.getProductTpl(product)
     const infoProducts = this.getDivWithClass('infoProduct',productTpl)
 
+    if(this.countItems === this.selected){
+      this.sendEvent('product-selection',product)
+    }
     const div = this.getDivWithClass('products',html`
     
         <input type="radio" name="products" .checked="${this.countItems === this.selected}" 
