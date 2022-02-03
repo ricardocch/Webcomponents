@@ -26,38 +26,46 @@
   </head>
 
   <body>
-    <bbva-core-demo-helper>
-      <bbva-core-demo-case heading="default" description="One curency">
+    <bbva-core-demo-helper events='["product-selection"]'>
+      <bbva-core-demo-case heading="default" description="One currency">
         <template>
           <script type="module">
             let arrayItems = window.DemoHelpers.ONE_CURRENCY
-            arrayItems = JSON.stringify(arrayItems)
-            console.log(arrayItems);
-            document.querySelector('product-selector').setAttribute("items",arrayItems)
+            const productSelector = document.querySelector('product-selector')
+            productSelector.items = arrayItems
+
           </script>
           <product-selector></product-selector>
         </template>
       </bbva-core-demo-case>
-      <bbva-core-demo-case heading="multi currency" description="multicurency">
+      <bbva-core-demo-case heading="multi currency" description="multi currency">
         <template>
           <script type="module">
             let arrayItems = window.DemoHelpers.MULTI_CURRENCY
-            arrayItems = JSON.stringify(arrayItems)
-            console.log(arrayItems);
-            document.querySelector('product-selector').setAttribute("items",arrayItems)
+            const productSelector = document.querySelector('product-selector')
+            productSelector.items = arrayItems
+
+            document.querySelector('button').addEventListener('click',function () {
+              productSelector.cleanSelection()
+            })
           </script>
-          <product-selector></product-selector>
+          <button>Borrar seleccion</button>
+          <product-selector selected="1"></product-selector>
         </template>
       </bbva-core-demo-case>
-      <bbva-core-demo-case heading="acount view" description="multicurency">
+      <bbva-core-demo-case heading="account view" description="account view">
         <template>
           <script type="module">
             let arrayItems = window.DemoHelpers.MULTI_CURRENCY
-            arrayItems = JSON.stringify(arrayItems)
-            console.log(arrayItems);
-            document.querySelector('product-selector').setAttribute("items",arrayItems)
+            const productSelector = document.querySelector('product-selector')
+            productSelector.items = arrayItems
+
+            document.querySelector('button').addEventListener('click',function () {
+              productSelector.cleanSelection()
+            })
           </script>
-          <product-selector></product-selector>
+          <button>Borrar seleccion</button>
+          <product-selector type="account"></product-selector>
         </template>
       </bbva-core-demo-case>
     </bbva-core-demo-helper>
