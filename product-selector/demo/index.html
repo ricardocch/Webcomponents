@@ -29,6 +29,16 @@
     <bbva-core-demo-helper events='["product-selection","clean-selection"]'>
       <bbva-core-demo-case heading="default" description="One currency">
         <template>
+          <bbva-core-demo-dm-helper
+          id="dmHelper"
+          without-login="">
+          <div slot="component">
+            <div class="component-wrapper">
+              <intl-demo-component></intl-demo-component>
+              <bbva-panel-detail id="panelDetail"></bbva-panel-detail>
+            </div>
+          </div>
+        </bbva-core-demo-dm-helper>
           <script type="module">
             let arrayItems = window.DemoHelpers.ONE_CURRENCY
             const productSelector = document.querySelector('product-selector')
@@ -66,6 +76,116 @@
           </script>
           <button>Borrar seleccion</button>
           <product-selector type="account"></product-selector>
+        </template>
+      </bbva-core-demo-case>
+
+      <bbva-core-demo-case heading="API" description="Consumo de servicios">
+        <template>
+          <bbva-core-demo-dm-helper
+            id="dmHelper"
+            without-login="">
+            <div slot="component">
+              <div class="component-wrapper">
+                <intl-demo-component></intl-demo-component>
+                <bbva-panel-detail id="panelDetail"></bbva-panel-detail>
+              </div>
+            </div>
+          </bbva-core-demo-dm-helper>
+          <script type="module">
+            
+            const { GftFinancialOverviewV0, response } = window.DemoHelpers;
+            const financialOverviewService = new GftFinancialOverviewV0(
+              {
+                host: 'https://mock-senda-node.herokuapp.com'
+              }
+            );
+
+            // const demo = document.querySelector('bbva-core-demo-dm-helper');
+            // const panelDetail = document.querySelector('bbva-panel-detail');
+            // const intl = document.querySelector('intl-demo-component');
+            
+            financialOverviewService.generateRequest('?contracts.productType=ACCOUNTS').then(data => {
+              // demo.jsonData = data;
+              // All props of data  must checked with UI Component
+              // for (const prop in data) {
+              //   panelDetail[prop] = data[prop];
+              // }
+              let products = []
+              
+              data = data.data.contracts
+              data.forEach(product => {
+                const CURRENCY = product.detail.specificAmounts[0].amounts[0].currency
+                
+                if(!products.length || products[products.length - 1].currency !== CURRENCY){ 
+                  products.push({
+                    currency:CURRENCY,
+                    products:[]
+                  }) 
+                }
+                
+                let indexCurrency = products.findIndex( element => element.currency === CURRENCY)
+                
+                products[indexCurrency].products.push({
+                    "alias": product.alias,
+                    "balance": product.detail.specificAmounts[0].amounts[0].amount,
+                    "entity": "",
+                    "id": product.id,
+                    "printedNumber": product.number
+                })
+
+              })
+
+              const productSelector = document.querySelector('product-selector')
+              productSelector.items = products
+            });
+
+           
+            
+            // demo.host = host;
+            // demo.dmMethods = [
+            //   {
+            //     event: 'get-financial-overview',
+            //     label: 'Get financial overview - original'
+            //   },
+            //   {
+            //     event: 'get-financial-overview-esperado',
+            //     label: 'Get financial overview - esperado'
+            //   },
+            //   {
+            //     event: 'get-financial-overview-lo-de-ustedes',
+            //     label: 'Get financial overview - lo de ustedes'
+            //   }
+            // ]
+            // demo.addEventListener('get-financial-overview', data => {
+            //   financialOverviewService.getFinancialOverviewDefault('?contracts.productType=ACCOUNTS')
+            //     .then(data => {
+            //       demo.jsonData = data;
+            //       // All props of data  must checked with UI Component
+            //       for (const prop in data) {
+            //         panelDetail[prop] = data[prop];
+            //       }
+            //     });
+            // });
+            // demo.addEventListener('get-financial-overview-esperado', data => {
+            //   demo.jsonData = response;
+            //   // All props of data  must checked with UI Component
+            //   for (const prop in response) {
+            //     panelDetail[prop] = response[prop];
+            //   }
+            // });
+            // demo.addEventListener('get-financial-overview-lo-de-ustedes', data => {
+            //   console.log('Enrique')
+            //   financialOverviewService.getFinancialOverview('?contracts.productType=ACCOUNTS')
+            //     .then(data => {
+            //       demo.jsonData = data;
+            //       // All props of data  must checked with UI Component
+            //       for (const prop in data) {
+            //         panelDetail[prop] = data[prop];
+            //       }
+            //     });
+            // });
+          </script>
+          <product-selector></product-selector>
         </template>
       </bbva-core-demo-case>
     </bbva-core-demo-helper>
