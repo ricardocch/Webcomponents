@@ -10,6 +10,11 @@
     "*.js",
     "!**/*.scss"
   ],
+  "scripts": {
+    "start": "cells lit-component:serve",
+    "test": "cells lit-component:test",
+    "watch":"cells lit-component:test:watch"
+  },
   "dependencies": {
     "@bbva-web-components/bbva-foundations-styles": "^2.3.5",
     "@bbva-web-components/bbva-core-lit-helpers": "^1.0.4",
