@@ -1,4 +1,4 @@
-export class GftFinancialOverviewV0 {
+export class DataProvider {
     constructor(config) {
       this.host = config.host;
       // https://mock-senda-node.herokuapp.com/financial-overview/v0/financial-overview?contracts.productType=ACCOUNTS
@@ -10,8 +10,14 @@ export class GftFinancialOverviewV0 {
     constructUrl(params) {
       return `${this.host}${this.getUrl()}${params}`;
     }
-    generateRequest(params) {
-      return fetch(this.constructUrl(params)).then(this.onSuccess).catch(this.onError);
+    async generateRequest(params) {
+      try{
+          const resp = await fetch(this.constructUrl(params))
+          return this.onSuccess(resp)
+      }
+      catch(error){
+        return this.onError(error)
+      }
     }
     onError(error) {
       return `Sucedió un error carnal: ${error}`;
@@ -20,7 +26,3 @@ export class GftFinancialOverviewV0 {
       return await response.json();
     }
   }
-  // const dataProvider = new GftFinancialOverviewV0({host: 'https://mock-senda-node.herokuapp.com'});
-  // dataProvider.generateRequest('?contracts.productType=ACCOUNTS').then(resultado => {
-  //   console.log(resultado)
-  // });
