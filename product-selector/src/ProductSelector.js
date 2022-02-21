@@ -1,6 +1,8 @@
 import { LitElement, html, state, } from 'lit-element';
 import { getComponentSharedStyles } from '@bbva-web-components/bbva-core-lit-helpers';
 import styles from './ProductSelector-styles.js';
+import '@bbva-web-components/bbva-button-default/bbva-button-default.js';
+import '@bbva-web-components/bbva-web-template-modal/bbva-web-template-modal.js';
 /**
 ![LitElement component](https://img.shields.io/badge/litElement-component-blue.svg)
 
@@ -58,7 +60,11 @@ export class ProductSelector extends LitElement {
   // Define a template
   render() {
     return html`
-
+    <bbva-button-default variant="primary">Default</bbva-button-default> 
+    <bbva-web-template-modal heading="Modal title" description="Subtitle" button="Button Active" link="Type Link" > 
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae metus tincidunt, cursus nulla et, venenatis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ornare blandit elit vel porttitor. Phasellus ultricies eleifend quam quis rhoncus.</p> 
+      <p>Fusce massa tellus, aliquam ut neque ut, ultricies sodales augue. Vivamus vitae nunc urna. Nullam et cursus ligula. Suspendisse mattis felis non molestie dictum. Donec vehicula eget turpis sed laoreet. Cras eleifend, justo eu varius tincidunt, urna dui imperdiet enim, sed posuere massa dolor vitae odio. Etiam congue aliquet magna, ac scelerisque lorem varius quis.</p> 
+    </bbva-web-template-modal>   
         ${this.items.map( (item) => {
             return html`
                 <h3>${item.currency}</h3>

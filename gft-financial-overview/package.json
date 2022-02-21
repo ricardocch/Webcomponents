@@ -1,0 +1,23 @@
+{
+  "name": "@bbva-web-components/gft-financial-overview",
+  "version": "1.0.0-rc.1",
+  "description": "",
+  "keywords": [],
+  "main": "index.js",
+  "files": [
+    "/src/",
+    "/locales/",
+    "*.js",
+    "!**/*.scss"
+  ],
+  "dependencies": {
+    "@bbva-web-components/bbva-core-lit-helpers": "^1.0.4",
+    "@btge/bbva-btge-web-product-selector": "^1.0.3",
+    "@cells-components/bgadp-financial-overview-v0": "^3.94.0",
+    "lit-element": "^2.0.0"
+  },
+  "devDependencies": {
+    "@cells/cells-component-core": "^3.0.0",
+    "@bbva-web-components/bbva-core-demo-dm-helper": "^0.1.14"
+  }
+}

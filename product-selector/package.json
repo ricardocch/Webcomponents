@@ -16,6 +16,7 @@
     "watch": "cells lit-component:test:watch"
   },
   "dependencies": {
+    "@bbva-web-components/bbva-button-default": "^5.10.3",
     "@bbva-web-components/bbva-core-lit-helpers": "^1.0.4",
     "@bbva-web-components/bbva-foundations-styles": "^2.3.5",
     "@bbva-web-components/bbva-web-template-modal": "^1.3.4",

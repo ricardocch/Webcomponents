@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>gft-financial-overview demo</title>
+    <script src="../build/webcomponents-loader.js"></script>
+    <script src="../build/scoping-ambients-shim.min.js"></script>
+    <script src="../build/custom-style-interface.min.js"></script>
+    <script>
+      {
+        const _customElementsDefine = window.customElements.define;
+        window.customElements.define = (name, cl, conf) => {
+          if (customElements.get(name)) {
+            console.warn(`${name} has been defined twice`);
+          } else {
+            _customElementsDefine.call(window.customElements, name, cl, conf);
+          }
+        };
+      }
+    </script>
+    <script defer src="../build/component.js"></script>
+    <script type="module" crossorigin="use-credentials">
+      import '../build/demo-build.js';
+    </script>
+  </head>
+
+  <body>
+    <bbva-core-demo-helper>
+      <bbva-core-demo-case heading="Basic" description="Default specs">
+        <template>
+          <!-- importante ponerle un ID -->
+          <script type="module">
+            const { GftFinancialOverviewSercice } = window.DemoHelpers
+        
+            const productSelector = document.querySelector('bbva-btge-web-product-selector');
+            const demo = document.querySelector('bbva-core-demo-dm-helper');
+
+            demo.dmMethods = [
+              {
+                event: 'gft-financial-overview-service-data',
+                label: 'gft-financial-overview-service-data',
+                method: 'getFinancialOverviewService()',
+              },
+              {
+                event: 'gft-financial-overview-service-products',
+                label: 'Gft Financial Overview products',
+                method: 'getFinancialOverviewService1()',
+              }
+            ];
+              
+            demo.addEventListener('gft-financial-overview-service-data', () => {
+              demo.loadingData = true;
+              let service = new GftFinancialOverviewSercice()
+              service.getData().then(response => {
+                demo.loadingData = false;
+                demo.jsonData = response;
+                console.log(response);
+              })
+            })
+            
+            demo.addEventListener('gft-financial-overview-service-products', () => {
+              
+              let service = new GftFinancialOverviewSercice()
+
+              demo.loadingData = true;
+              productSelector.loading = true;
+
+              service.getProducts().then(response => {
+                demo.loadingData = false;
+                demo.jsonData = response;
+                productSelector.items = response
+                productSelector.loading = false;
+              }).catch(error => {
+                demo.loadingData = false;
+                demo.jsonData = error;
+              })
+            })
+    
+          </script>
+          <bbva-core-demo-dm-helper id="dmHelper" without-login="">
+            <div slot="component">
+              <bbva-btge-web-product-selector></bbva-btge-web-product-selector>
+            </div>
+          </bbva-core-demo-dm-helper>
+        </template>
+      </bbva-core-demo-case>
+    </bbva-core-demo-helper>
+  </body>
+</html>
