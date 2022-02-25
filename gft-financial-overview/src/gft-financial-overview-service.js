@@ -5,7 +5,7 @@ export class GftFinancialOverviewSercice{
     constructor(){
 
     }
-
+ 
     async getProducts(){
         let products = []
         let data = await this.getData()
@@ -13,15 +13,17 @@ export class GftFinancialOverviewSercice{
         data = data.data.contracts
         data.forEach(product => {
             const CURRENCY = product.detail.specificAmounts[0].amounts[0].currency
+            let indexCurrency = products.length ? products.findIndex( element => element.currency === CURRENCY) : -1
             
-            if(!products.length || products[products.length - 1].currency !== CURRENCY){ 
+            if(indexCurrency < 0){ 
                 products.push({
                 currency:CURRENCY,
                 products:[]
                 }) 
+                indexCurrency = products.length -1;
             }
             
-            let indexCurrency = products.findIndex( element => element.currency === CURRENCY)
+           
             
             products[indexCurrency].products.push({
                 "alias": product.alias,
